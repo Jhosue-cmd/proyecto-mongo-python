@@ -10,7 +10,7 @@ function App() {
   const fetchCustomers = async () => {
     try {
       // Asegúrate de que tu Python esté corriendo en el puerto 8000
-      const response = await axios.get('https://backend-python-203b.onrender.com/');
+      const response = await axios.get('https://backend-python-203b.onrender.com/api/customers');
       setCustomers(response.data);
       setLoading(false);
     } catch (error) {
