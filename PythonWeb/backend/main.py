@@ -12,6 +12,7 @@ origins = [
     "http://localhost:5174",  # <--- Agregamos tu puerto actual
     "http://localhost:5175",
     "http://localhost:3000",
+    "https://fronted-python-g2b9.onrender.com",
 ]
 app.add_middleware(
     CORSMiddleware,
