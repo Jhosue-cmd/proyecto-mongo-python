@@ -6,10 +6,10 @@ function App() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Función para pedir datos a Python
+ 
   const fetchCustomers = async () => {
     try {
-      // Asegúrate de que tu Python esté corriendo en el puerto 8000
+     
       const response = await axios.get('https://backend-python-203b.onrender.com/api/customers');
       setCustomers(response.data);
       setLoading(false);
@@ -23,28 +23,39 @@ function App() {
     fetchCustomers();
   }, []);
 
-  if (loading) return <h1>Cargando datos de MongoDB...</h1>;
+  if (loading) return <h1>Loading data of mongodb...</h1>;
 
-  return (
+ return (
     <div className="container">
-      <h1>Lista de Clientes (MongoDB + Python + React)</h1>
+      <h1>Customer List</h1>
       <table border="1" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
         <thead style={{ backgroundColor: '#282c34', color: 'white' }}>
           <tr>
+            
+            <th style={{ padding: '10px' }}>ID</th>
             <th style={{ padding: '10px' }}>Full Name</th>
             <th style={{ padding: '10px' }}>Email</th>
             <th style={{ padding: '10px' }}>Type</th>
+            <th style={{ padding: '10px' }}>Discount</th>
             <th style={{ padding: '10px' }}>Total Sale</th>
           </tr>
         </thead>
         <tbody>
-          {customers.map((customer) => (
+      
+          {Array.isArray(customers) && customers.map((customer) => (
             <tr key={customer.uid} style={{ textAlign: 'center' }}>
+              {/* 2. Nuevas celdas (Datos) */}
+              <td style={{ padding: '8px', fontWeight: 'bold' }}>{customer.id}</td>
+              
               <td style={{ padding: '8px' }}>{customer.fullName}</td>
               <td style={{ padding: '8px' }}>{customer.email}</td>
+              
               <td style={{ padding: '8px', color: customer.type === 'Frquent' ? 'green' : 'blue' }}>
                 {customer.type}
               </td>
+
+              <td style={{ padding: '8px' }}>{customer.discount}%</td>
+              
               <td style={{ padding: '8px' }}>${customer.totalSale}</td>
             </tr>
           ))}
@@ -53,5 +64,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
